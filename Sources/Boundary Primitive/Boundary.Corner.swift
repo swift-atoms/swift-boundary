@@ -57,15 +57,25 @@ extension Boundary.Corner {
     }
 
     /// Two corners are equal when they name the same vertex of the box.
-    @inlinable public static func == (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool { lhs._rank == rhs._rank }
+    @inlinable public static func == (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool {
+        lhs._rank == rhs._rank
+    }
     /// Orders corners by their declaration rank: top-left, top-right, bottom-left, bottom-right.
-    @inlinable public static func < (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool { lhs._rank < rhs._rank }
+    @inlinable public static func < (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool {
+        lhs._rank < rhs._rank
+    }
     /// Whether this corner precedes or equals the other in declaration rank.
-    @inlinable public static func <= (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool { lhs._rank <= rhs._rank }
+    @inlinable public static func <= (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool {
+        lhs._rank <= rhs._rank
+    }
     /// Whether this corner follows the other in declaration rank.
-    @inlinable public static func > (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool { lhs._rank > rhs._rank }
+    @inlinable public static func > (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool {
+        lhs._rank > rhs._rank
+    }
     /// Whether this corner follows or equals the other in declaration rank.
-    @inlinable public static func >= (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool { lhs._rank >= rhs._rank }
+    @inlinable public static func >= (lhs: Boundary.Corner, rhs: Boundary.Corner) -> Bool {
+        lhs._rank >= rhs._rank
+    }
     /// Hashes the corner by its declaration rank.
     @inlinable public func hash(into hasher: inout Hasher) { hasher.combine(_rank) }
 }

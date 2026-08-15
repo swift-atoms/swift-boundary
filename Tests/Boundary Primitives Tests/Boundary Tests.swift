@@ -20,7 +20,11 @@ struct `Boundary.Edge` {
         func `allCases and ordering`() {
             #expect(Boundary.Edge.allCases == [.top, .left, .bottom, .right])
             #expect(Boundary.Edge.top < .left)
-            #expect([Boundary.Edge.right, .top, .bottom, .left].sorted() == [.top, .left, .bottom, .right])
+            #expect(
+                [Boundary.Edge.right, .top, .bottom, .left].sorted() == [
+                    .top, .left, .bottom, .right,
+                ]
+            )
         }
 
         @Test
@@ -58,7 +62,9 @@ struct `Boundary.Corner` {
         @Test
         func `allCases and Hashable`() {
             #expect(Boundary.Corner.allCases == [.topLeft, .topRight, .bottomLeft, .bottomRight])
-            let set: Set<Boundary.Corner> = [.topLeft, .topRight, .bottomLeft, .bottomRight, .topLeft]
+            let set: Set<Boundary.Corner> = [
+                .topLeft, .topRight, .bottomLeft, .bottomRight, .topLeft,
+            ]
             #expect(set.count == 4)
         }
     }

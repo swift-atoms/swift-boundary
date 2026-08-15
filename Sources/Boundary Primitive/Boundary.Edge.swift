@@ -48,15 +48,25 @@ extension Boundary.Edge {
     }
 
     /// Two edges are equal when they name the same face of the box.
-    @inlinable public static func == (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool { lhs._rank == rhs._rank }
+    @inlinable public static func == (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool {
+        lhs._rank == rhs._rank
+    }
     /// Orders edges by their declaration rank: top, left, bottom, right.
-    @inlinable public static func < (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool { lhs._rank < rhs._rank }
+    @inlinable public static func < (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool {
+        lhs._rank < rhs._rank
+    }
     /// Whether this edge precedes or equals the other in declaration rank.
-    @inlinable public static func <= (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool { lhs._rank <= rhs._rank }
+    @inlinable public static func <= (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool {
+        lhs._rank <= rhs._rank
+    }
     /// Whether this edge follows the other in declaration rank.
-    @inlinable public static func > (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool { lhs._rank > rhs._rank }
+    @inlinable public static func > (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool {
+        lhs._rank > rhs._rank
+    }
     /// Whether this edge follows or equals the other in declaration rank.
-    @inlinable public static func >= (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool { lhs._rank >= rhs._rank }
+    @inlinable public static func >= (lhs: Boundary.Edge, rhs: Boundary.Edge) -> Bool {
+        lhs._rank >= rhs._rank
+    }
     /// Hashes the edge by its declaration rank.
     @inlinable public func hash(into hasher: inout Hasher) { hasher.combine(_rank) }
 }
