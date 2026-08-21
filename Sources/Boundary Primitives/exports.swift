@@ -1,5 +1,3 @@
-// exports.swift
-
 @_exported public import Boundary_Comparison_Primitives
 @_exported public import Boundary_Equation_Primitives
 @_exported public import Boundary_Hash_Primitives

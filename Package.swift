@@ -39,10 +39,9 @@ let package = Package(
         ),
     ],
     targets: [
-        // MARK: - Namespace (zero external dependencies — [MOD-017]; CaseIterable is stdlib)
+
         .target(name: "Boundary Primitive", dependencies: []),
 
-        // MARK: - Sub-namespace targets (per [MOD-031]): institute twins
         .target(
             name: "Boundary Equation Primitives",
             dependencies: [
@@ -65,7 +64,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Umbrella
         .target(
             name: "Boundary Primitives",
             dependencies: [
@@ -76,14 +74,12 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Test Support
         .target(
             name: "Boundary Primitives Test Support",
             dependencies: ["Boundary Primitives"],
             path: "Tests/Support"
         ),
 
-        // MARK: - Tests
         .testTarget(
             name: "Boundary Primitives Tests",
             dependencies: ["Boundary Primitives", "Boundary Primitives Test Support"]

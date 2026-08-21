@@ -1,9 +1,5 @@
-// Boundary Tests.swift
-
 import Boundary_Primitives
 import Testing
-
-// MARK: - Boundary.Edge
 
 @Suite
 struct `Boundary.Edge` {
@@ -38,8 +34,6 @@ struct `Boundary.Edge` {
 
     @Suite struct Integration {}
 }
-
-// MARK: - Boundary.Corner
 
 @Suite
 struct `Boundary.Corner` {
