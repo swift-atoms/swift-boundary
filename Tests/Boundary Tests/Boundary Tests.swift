@@ -1,4 +1,4 @@
-import Boundary_Primitives
+import Boundary
 import Testing
 
 @Suite
