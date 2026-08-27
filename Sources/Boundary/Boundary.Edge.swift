@@ -25,7 +25,7 @@ extension Boundary.Edge {
     }
 }
 
-extension Boundary.Edge {
+extension Boundary.Edge: Comparable, Hashable {
     @usableFromInline
     var _rank: Int {
         switch self {

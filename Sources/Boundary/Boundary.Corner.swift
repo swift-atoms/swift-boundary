@@ -31,7 +31,7 @@ extension Boundary.Corner {
     public var isLeft: Bool { self == .topLeft || self == .bottomLeft }
 }
 
-extension Boundary.Corner {
+extension Boundary.Corner: Comparable, Hashable {
     @usableFromInline
     var _rank: Int {
         switch self {
