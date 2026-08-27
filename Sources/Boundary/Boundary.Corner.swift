@@ -64,7 +64,3 @@ extension Boundary.Corner {
 
     @inlinable public func hash(into hasher: inout Hasher) { hasher.combine(_rank) }
 }
-
-#if !hasFeature(Embedded)
-    extension Boundary.Corner: Codable {}
-#endif

@@ -58,7 +58,3 @@ extension Boundary.Edge {
 
     @inlinable public func hash(into hasher: inout Hasher) { hasher.combine(_rank) }
 }
-
-#if !hasFeature(Embedded)
-    extension Boundary.Edge: Codable {}
-#endif
