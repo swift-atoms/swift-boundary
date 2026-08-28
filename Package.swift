@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-boundary-primitives",
+    name: "swift-boundary",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -11,78 +11,52 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        .library(name: "Boundary Primitive", targets: ["Boundary Primitive"]),
-        .library(name: "Boundary Equation Primitives", targets: ["Boundary Equation Primitives"]),
-        .library(name: "Boundary Hash Primitives", targets: ["Boundary Hash Primitives"]),
+        .library(name: "Boundary", targets: ["Boundary"]),
+        .library(name: "Boundary Hash", targets: ["Boundary Hash"]),
         .library(
-            name: "Boundary Comparison Primitives",
-            targets: ["Boundary Comparison Primitives"]
-        ),
-        .library(name: "Boundary Primitives", targets: ["Boundary Primitives"]),
-        .library(
-            name: "Boundary Primitives Test Support",
-            targets: ["Boundary Primitives Test Support"]
+            name: "Boundary Comparison",
+            targets: ["Boundary Comparison"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-equation-primitives.git",
+            url: "https://github.com/swift-atoms/swift-hash.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-hash-primitives.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-primitives/swift-comparison-primitives.git",
+            url: "https://github.com/swift-atoms/swift-comparison.git",
             branch: "main"
         ),
     ],
     targets: [
 
-        .target(name: "Boundary Primitive", dependencies: []),
+        .target(name: "Boundary", dependencies: []),
 
         .target(
-            name: "Boundary Equation Primitives",
+            name: "Boundary Hash",
             dependencies: [
-                "Boundary Primitive",
-                .product(name: "Equation Primitives", package: "swift-equation-primitives"),
+                .target(name: "Boundary"),
+                .product(name: "Hash Protocol", package: "swift-hash"),
             ]
         ),
         .target(
-            name: "Boundary Hash Primitives",
+            name: "Boundary Comparison",
             dependencies: [
-                "Boundary Primitive",
-                .product(name: "Hash Primitives", package: "swift-hash-primitives"),
+                .target(name: "Boundary"),
+                .product(name: "Comparison Protocol", package: "swift-comparison"),
             ]
         ),
-        .target(
-            name: "Boundary Comparison Primitives",
-            dependencies: [
-                "Boundary Primitive",
-                .product(name: "Comparison Primitives", package: "swift-comparison-primitives"),
-            ]
-        ),
-
-        .target(
-            name: "Boundary Primitives",
-            dependencies: [
-                "Boundary Primitive",
-                "Boundary Equation Primitives",
-                "Boundary Hash Primitives",
-                "Boundary Comparison Primitives",
-            ]
-        ),
-
-        .target(
-            name: "Boundary Primitives Test Support",
-            dependencies: ["Boundary Primitives"],
-            path: "Tests/Support"
-        ),
-
         .testTarget(
-            name: "Boundary Primitives Tests",
-            dependencies: ["Boundary Primitives", "Boundary Primitives Test Support"]
+            name: "Boundary Tests",
+            dependencies: [.target(name: "Boundary")]
+        ),
+        .testTarget(
+            name: "Boundary Hash Tests",
+            dependencies: [.target(name: "Boundary Hash")]
+        ),
+        .testTarget(
+            name: "Boundary Comparison Tests",
+            dependencies: [.target(name: "Boundary Comparison")]
         ),
     ],
     swiftLanguageModes: [.v6]
