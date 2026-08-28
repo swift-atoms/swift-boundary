@@ -1,5 +1,5 @@
-public import Boundary_Primitive
-public import Comparison
+public import Boundary
+public import Comparison_Protocol
 
-extension Boundary.Edge: Comparison.`Protocol` {}
-extension Boundary.Corner: Comparison.`Protocol` {}
+extension Boundary::Boundary.Edge: Comparison::Comparison.`Protocol` {}
+extension Boundary::Boundary.Corner: Comparison::Comparison.`Protocol` {}

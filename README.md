@@ -31,14 +31,15 @@ print(corner.isTop, corner.isLeft)  // true true
 Both enums are `CaseIterable`, totally ordered (`Comparable` by declaration rank), `Hashable`, and `Codable`, so they drop straight into `Set`, `Dictionary` keys, `sorted()`, and serialization:
 
 ```swift
-import Boundary
+import Boundary_Comparison
+import Boundary_Hash
 
 let edges: Set<Boundary.Edge> = [.right, .top, .top]   // {top, right}
 let sorted = [Boundary.Corner.bottomRight, .topLeft].sorted()
 // [topLeft, bottomRight]
 ```
 
-The lossless carrier projections (`Edge.facet`, `Corner.orthant`) live in the per-carrier bridge packages `swift-boundary-facet` and `swift-boundary-orthant`. The institute-twin protocol conformances (`Equation.Protocol`, `Hash.Protocol`, `Comparison.Protocol`) ship as separate products so a consumer pays only for the witnesses it imports.
+The lossless carrier projections (`Edge.facet`, `Corner.orthant`) live in the per-carrier bridge packages `swift-boundary-facet` and `swift-boundary-orthant`. Hash and comparison protocol conformances ship as separate products so a consumer imports only the witnesses it needs.
 
 ---
 
@@ -46,7 +47,7 @@ The lossless carrier projections (`Edge.facet`, `Corner.orthant`) live in the pe
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-molecules/swift-boundary.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-boundary.git", branch: "main")
 ]
 ```
 
@@ -54,7 +55,8 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Boundary", package: "swift-boundary"),
+        .product(name: "Boundary Hash", package: "swift-boundary"),
+        .product(name: "Boundary Comparison", package: "swift-boundary"),
     ]
 )
 ```
@@ -65,16 +67,13 @@ Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26 
 
 ## Architecture
 
-Six library products. The root namespace has zero external dependencies; each institute-twin target adds one conformance over its matching primitive.
+Three library products. The root namespace has zero external dependencies; each layered target adds one protocol conformance.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
-| `Boundary Primitive` | `Sources/Boundary Primitive/` | The `Boundary` namespace: `Boundary.Edge` (four edges over `Facet<2>`) and `Boundary.Corner` (four corners over `Orthant<2>`), with `opposite`, corner `isTop` / `isLeft`, total ordering, hashing, and `Codable`. |
-| `Boundary Equation` | `Sources/Boundary Equation/` | Conforms `Edge` and `Corner` to the institute `Equation.Protocol`. |
-| `Boundary Hash` | `Sources/Boundary Hash/` | Conforms `Edge` and `Corner` to the institute `Hash.Protocol`. |
-| `Boundary Comparison` | `Sources/Boundary Comparison/` | Conforms `Edge` and `Corner` to the institute `Comparison.Protocol`. |
-| `Boundary` | `Sources/Boundary/` | Umbrella that re-exports the root namespace and all three institute-twin conformances. |
-| `Boundary Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
+| `Boundary` | `Sources/Boundary/` | The `Boundary` namespace: `Boundary.Edge` and `Boundary.Corner`, with opposites, corner queries, operators, hashing implementation, and `Codable`. |
+| `Boundary Hash` | `Sources/Boundary Hash/` | Conforms `Edge` and `Corner` to `Hash.Protocol`. |
+| `Boundary Comparison` | `Sources/Boundary Comparison/` | Conforms `Edge` and `Corner` to `Comparison.Protocol`. |
 
 Foundation-free.
 
