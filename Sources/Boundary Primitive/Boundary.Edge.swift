@@ -25,7 +25,7 @@ extension Boundary.Edge {
     }
 }
 
-extension Boundary.Edge: Comparable, Hashable {
+extension Boundary.Edge {
     @usableFromInline
     var _rank: Int {
         switch self {
@@ -58,3 +58,7 @@ extension Boundary.Edge: Comparable, Hashable {
 
     @inlinable public func hash(into hasher: inout Hasher) { hasher.combine(_rank) }
 }
+
+#if !hasFeature(Embedded)
+    extension Boundary.Edge: Codable {}
+#endif

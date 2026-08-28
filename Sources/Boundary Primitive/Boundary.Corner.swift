@@ -31,7 +31,7 @@ extension Boundary.Corner {
     public var isLeft: Bool { self == .topLeft || self == .bottomLeft }
 }
 
-extension Boundary.Corner: Comparable, Hashable {
+extension Boundary.Corner {
     @usableFromInline
     var _rank: Int {
         switch self {
@@ -64,3 +64,7 @@ extension Boundary.Corner: Comparable, Hashable {
 
     @inlinable public func hash(into hasher: inout Hasher) { hasher.combine(_rank) }
 }
+
+#if !hasFeature(Embedded)
+    extension Boundary.Corner: Codable {}
+#endif
