@@ -52,11 +52,17 @@ let package = Package(
         ),
         .testTarget(
             name: "Boundary Hash Tests",
-            dependencies: [.target(name: "Boundary Hash")]
+            dependencies: [
+                .target(name: "Boundary"),
+                .target(name: "Boundary Hash"),
+            ]
         ),
         .testTarget(
             name: "Boundary Comparison Tests",
-            dependencies: [.target(name: "Boundary Comparison")]
+            dependencies: [
+                .target(name: "Boundary"),
+                .target(name: "Boundary Comparison"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]
