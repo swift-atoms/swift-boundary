@@ -2,7 +2,7 @@ import Boundary
 import Testing
 
 @Suite
-struct `Boundary Tests` {
+struct `Boundary edges preserve their structure under opposition` {
     @Test
     func `opposites are involutive`() {
         for edge in Boundary.Edge.allCases {
