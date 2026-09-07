@@ -12,11 +12,9 @@ let package = Package(
     ],
     products: [
         .library(name: "Boundary", targets: ["Boundary"]),
-        .library(name: "Boundary Hash", targets: ["Boundary Hash"]),
-        .library(
-            name: "Boundary Comparison",
-            targets: ["Boundary Comparison"]
-        ),
+        .library(name: "Boundary Standard Library Integration", targets: ["Boundary Standard Library Integration"]),
+        .library(name: "Boundary Foundation Library Integration", targets: ["Boundary Foundation Library Integration"]),
+        .library(name: "Boundary Test Support", targets: ["Boundary Test Support"]),
     ],
     dependencies: [
         .package(
@@ -29,47 +27,52 @@ let package = Package(
         ),
     ],
     targets: [
-
-        .target(name: "Boundary", dependencies: []),
-
         .target(
-            name: "Boundary Hash",
+            name: "Boundary",
             dependencies: [
-                .target(name: "Boundary"),
-                .product(name: "Hash Protocol", package: "swift-hash"),
-            ]
+                .product(name: "Hash", package: "swift-hash"),
+                .product(name: "Comparison", package: "swift-comparison"),
+            ],
+            path: "Sources/Boundary"
         ),
         .target(
-            name: "Boundary Comparison",
+            name: "Boundary Standard Library Integration",
             dependencies: [
                 .target(name: "Boundary"),
-                .product(name: "Comparison Protocol", package: "swift-comparison"),
-            ]
+            ],
+            path: "Sources/Boundary Standard Library Integration"
+        ),
+        .target(
+            name: "Boundary Foundation Library Integration",
+            dependencies: [
+                .target(name: "Boundary"),
+                .target(name: "Boundary Standard Library Integration"),
+            ],
+            path: "Sources/Boundary Foundation Library Integration"
+        ),
+        .target(
+            name: "Boundary Test Support",
+            dependencies: [
+                .target(name: "Boundary"),
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Boundary Tests",
-            dependencies: [.target(name: "Boundary")]
-        ),
-        .testTarget(
-            name: "Boundary Hash Tests",
             dependencies: [
                 .target(name: "Boundary"),
-                .target(name: "Boundary Hash"),
-            ]
-        ),
-        .testTarget(
-            name: "Boundary Comparison Tests",
-            dependencies: [
-                .target(name: "Boundary"),
-                .target(name: "Boundary Comparison"),
-            ]
+                .target(name: "Boundary Test Support"),
+                .target(name: "Boundary Standard Library Integration"),
+                .target(name: "Boundary Foundation Library Integration"),
+            ],
+            path: "Tests/Boundary Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -78,6 +81,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-    let package: [SwiftSetting] = []
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }

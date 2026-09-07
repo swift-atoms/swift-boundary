@@ -1,5 +1,4 @@
-public import Boundary
-public import Hash_Protocol
+public import Hash
 
 extension Boundary::Boundary.Edge: Hash::Hash.`Protocol` {}
 extension Boundary::Boundary.Corner: Hash::Hash.`Protocol` {}
