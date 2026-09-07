@@ -60,5 +60,5 @@ extension Boundary.Edge {
 }
 
 #if !hasFeature(Embedded)
-    extension Boundary.Edge: Codable {}
+extension Boundary.Edge: Swift.Codable {}
 #endif

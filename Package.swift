@@ -12,8 +12,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Boundary", targets: ["Boundary"]),
-        .library(name: "Boundary Standard Library Integration", targets: ["Boundary Standard Library Integration"]),
-        .library(name: "Boundary Foundation Library Integration", targets: ["Boundary Foundation Library Integration"]),
+
+        .library(name: "Boundary Foundation Integration", targets: ["Boundary Foundation Integration"]),
         .library(name: "Boundary Test Support", targets: ["Boundary Test Support"]),
     ],
     dependencies: [
@@ -35,20 +35,13 @@ let package = Package(
             ],
             path: "Sources/Boundary"
         ),
+        
         .target(
-            name: "Boundary Standard Library Integration",
+            name: "Boundary Foundation Integration",
             dependencies: [
                 .target(name: "Boundary"),
             ],
-            path: "Sources/Boundary Standard Library Integration"
-        ),
-        .target(
-            name: "Boundary Foundation Library Integration",
-            dependencies: [
-                .target(name: "Boundary"),
-                .target(name: "Boundary Standard Library Integration"),
-            ],
-            path: "Sources/Boundary Foundation Library Integration"
+            path: "Sources/Boundary Foundation Integration"
         ),
         .target(
             name: "Boundary Test Support",
@@ -62,8 +55,7 @@ let package = Package(
             dependencies: [
                 .target(name: "Boundary"),
                 .target(name: "Boundary Test Support"),
-                .target(name: "Boundary Standard Library Integration"),
-                .target(name: "Boundary Foundation Library Integration"),
+                .target(name: "Boundary Foundation Integration"),
             ],
             path: "Tests/Boundary Tests"
         ),

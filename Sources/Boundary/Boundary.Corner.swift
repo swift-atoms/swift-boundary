@@ -66,5 +66,5 @@ extension Boundary.Corner {
 }
 
 #if !hasFeature(Embedded)
-    extension Boundary.Corner: Codable {}
+extension Boundary.Corner: Swift.Codable {}
 #endif
