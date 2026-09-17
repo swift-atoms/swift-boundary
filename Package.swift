@@ -16,26 +16,11 @@ let package = Package(
         .library(name: "Boundary Foundation Integration", targets: ["Boundary Foundation Integration"]),
         .library(name: "Boundary Test Support", targets: ["Boundary Test Support"]),
     ],
-    dependencies: [
-
-        .package(url: "https://github.com/swift-atoms/swift-equation.git", branch: "main"),
-
-        .package(
-            url: "https://github.com/swift-atoms/swift-hash.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-atoms/swift-comparison.git",
-            branch: "main"
-        ),
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "Boundary",
-            dependencies: [
-                .product(name: "Hash", package: "swift-hash"),
-                .product(name: "Comparison", package: "swift-comparison"),
-            ],
+            dependencies: [],
             path: "Sources/Boundary"
         ),
         
@@ -61,33 +46,6 @@ let package = Package(
                 .target(name: "Boundary Foundation Integration"),
             ],
             path: "Tests/Boundary Tests"
-        ),
-        .testTarget(
-            name: "Consolidated Boundary Comparison Tests",
-            dependencies: [
-
-                .target(name: "Boundary"),
-                .product(name: "Comparison", package: "swift-comparison"),
-            ],
-            path: "Tests/Consolidated swift-boundary-comparison"
-        ),
-        .testTarget(
-            name: "Consolidated Boundary Equation Tests",
-            dependencies: [
-
-                .target(name: "Boundary"),
-                .product(name: "Equation", package: "swift-equation"),
-            ],
-            path: "Tests/Consolidated swift-boundary-equation"
-        ),
-        .testTarget(
-            name: "Consolidated Boundary Hash Tests",
-            dependencies: [
-
-                .target(name: "Boundary"),
-                .product(name: "Hash", package: "swift-hash"),
-            ],
-            path: "Tests/Consolidated swift-boundary-hash"
         ),
     ],
     swiftLanguageModes: [.v6]
