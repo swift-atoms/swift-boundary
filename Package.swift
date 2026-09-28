@@ -16,11 +16,28 @@ let package = Package(
         .library(name: "Boundary Foundation Integration", targets: ["Boundary Foundation Integration"]),
         .library(name: "Boundary Test Support", targets: ["Boundary Test Support"]),
     ],
-    dependencies: [],
+    traits: [
+        .trait(name: "Facet", description: "Facet integration"),
+        .trait(name: "Orthant", description: "Orthant integration"),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-facet.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-axis.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-direction.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-orthant.git", branch: "main"),
+
+
+    ],
     targets: [
         .target(
             name: "Boundary",
-            dependencies: [],
+            dependencies: [
+                .product(name: "Facet", package: "swift-facet", condition: .when(traits: ["Facet"])),
+                .product(name: "Axis", package: "swift-axis", condition: .when(traits: ["Facet"])),
+                .product(name: "Direction", package: "swift-direction", condition: .when(traits: ["Facet"])),
+                .product(name: "Orthant", package: "swift-orthant", condition: .when(traits: ["Orthant"])),
+
+            ],
             path: "Sources/Boundary"
         ),
         
@@ -46,6 +63,24 @@ let package = Package(
                 .target(name: "Boundary Foundation Integration"),
             ],
             path: "Tests/Boundary Tests"
+        ),
+        .testTarget(
+            name: "Boundary Facet Tests",
+            dependencies: [
+                .target(name: "Boundary"),
+                .product(name: "Facet", package: "swift-facet", condition: .when(traits: ["Facet"])),
+                .product(name: "Axis", package: "swift-axis", condition: .when(traits: ["Facet"])),
+                .product(name: "Direction", package: "swift-direction", condition: .when(traits: ["Facet"])),
+            ],
+            path: "Tests/Boundary Facet Tests"
+        ),
+        .testTarget(
+            name: "Boundary Orthant Tests",
+            dependencies: [
+                .target(name: "Boundary"),
+                .product(name: "Orthant", package: "swift-orthant", condition: .when(traits: ["Orthant"])),
+            ],
+            path: "Tests/Boundary Orthant Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
