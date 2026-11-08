@@ -1,3 +1,3 @@
 #if Orthant
-    public import Orthant
+    import Orthant
 #endif
