@@ -1,3 +1,3 @@
 #if Facet
-    @_exported public import Facet
+    public import Facet
 #endif
