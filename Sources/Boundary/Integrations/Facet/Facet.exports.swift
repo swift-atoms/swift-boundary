@@ -1,3 +1,3 @@
 #if Facet
-    public import Facet
+    import Facet
 #endif
