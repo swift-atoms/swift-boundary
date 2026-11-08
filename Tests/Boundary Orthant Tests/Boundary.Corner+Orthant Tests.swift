@@ -2,9 +2,9 @@
     import Boundary
     import Testing
 
-enum `Boundary.Corner+Orthant Tests` {}
+    enum `Boundary.Corner+Orthant Tests` {}
 
-extension `Boundary.Corner+Orthant Tests` {
+    extension `Boundary.Corner+Orthant Tests` {
         @Suite
         struct `Boundary.Corner Orthant projection` {
             @Suite struct Unit {
@@ -32,5 +32,5 @@ extension `Boundary.Corner+Orthant Tests` {
             }
 
         }
-}
+    }
 #endif

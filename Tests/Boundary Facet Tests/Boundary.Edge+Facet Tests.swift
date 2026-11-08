@@ -4,9 +4,9 @@
     import Direction
     import Testing
 
-enum `Boundary.Edge+Facet Tests` {}
+    enum `Boundary.Edge+Facet Tests` {}
 
-extension `Boundary.Edge+Facet Tests` {
+    extension `Boundary.Edge+Facet Tests` {
         @Suite
         struct `Boundary.Edge Facet projection` {
             @Suite struct Unit {
@@ -32,5 +32,5 @@ extension `Boundary.Edge+Facet Tests` {
             }
 
         }
-}
+    }
 #endif
